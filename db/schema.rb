@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 20140512122338) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  add_index "memos", ["memoable_id"], name: "index_memos_on_memoable_id"
+  add_index "memos", ["memoable_type"], name: "index_memos_on_memoable_type"
 
   create_table "reviews", force: true do |t|
     t.integer  "book_id"
