@@ -1,56 +1,133 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  resources :members
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  resources :fan_comments
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  # resource :config
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  # get "ajax/test"
+  # get "extra/sendmail"
+  # get "hello/list"
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  resources :reviews
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
+  resources :authors
+
+  resources :users
+
+  resources :books
+
+
+  # resources :books, constraints: { id: /[0-9]{1,2}/ }
+
+  # constraints(id: /[0-9]{1,2}/) do
+  #   resources :books
+  #   resources :reviews
+  # end
+
+  # resources :books, constraints: TimeConstraint.new
+  # resources :books, format: false
+
+  # resources :users, controller: :members
+  # resources :reviews, as: :comments
+
+  # namespace :admin do
+  #   resources :books
+  # end
+
+  # scope module: :admin do
+  #   resources :books
+  # end
+
+  # scope :admin do
+  #   resources :books
+  # end
+
+  # scope ':locale' do
+  #   resources :books
+  # end
+
+
+  # resources :reviews do
+  #   collection do
+  #     get :unapproval
   #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
+  #   member do
+  #     get :draft
   #   end
+  # end
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
+  # resources :reviews do
+  #   get :unapproval, on: :collection
+  #   get :draft, on: :member
+  # end
 
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
+  # resources :users, except: [ :show, :destroy ]
+  # resources :users, only: [ :index, :new, :create, :edit, :update ]
+  # resources :reviews, path_names:  { new: :insert, edit: :revise }
 
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
+  # resources :books do
+  #   resources :reviews
+  # end
+
+  # resources :books do
+  #   resources :reviews, shallow: true
+  # end
+
+  # resources :books do
+  #   resources :reviews, only: [ :index, :new, :create ]
+  # end
+  # resources :reviews, except: [ :index, :new, :create ]
+
+  # scope shallow_path: :b do
+  #   resources :books do
+  #     resources :reviews, shallow: true
   #   end
+  # end
+
+  # scope shallow_prefix: :b do
+  #   resources :books do
+  #     resources :reviews, shallow: true
+  #   end
+  # end
+
+  # concern :additional do
+  #   get :unapproval, on: :collection
+  #   get :draft, on: :member
+  # end
+
+  # resources :reviews, concerns: :additional
+  # resources :users, concerns: :additional
+
+  # get '/blogs/:user_id' => 'blogs#index'
+  # get '/blogs/:user_id', to: 'blogs#index'
+  # get 'hello/view' 
+  # get '/articles(/:category)' => 'articles#index',
+  #  defaults: { category: 'general', format: 'xml' }
+
+  # get 'blogs/:user_id' => 'blogs#index',
+  #  constraints: { user_id: /[A-Za-z0-9]{3,7}/ }
+
+  # get 'blogs/:user_id' => 'blogs#index', user_id: /[A-Za-z0-9]{3,7}/
+
+  # get ':controller(/:action(/:id))', controller: /common\/[^\/]+/
+  # get 'articles' => 'main#index', as: :top
+  # get 'articles/*category/:id' => 'articles#category'
+  # get '/books/:id' => redirect('/articles/%{id}')
+  # get '/books/:id' => redirect {|p, req| "/articles/#{p[:id].to_i + 10000}" }
+
+  # scope "(:locale)", locale: /ja|en|de/ do
+  #   resources :books
+  #   match ':controller(/:action(/:id))', via: [ :get ]
+  # end
+
+  # match '/:locale' => 'books#index', via: [ :get]
+  # root to: 'books#index'
+
+  # get ':controller(/:action(/:id(.:format)))'
+  # post ':controller(/:action(/:id(.:format)))'
+  # patch ':controller(/:action(/:id(.:format)))'
+  # root to: 'books#index'
+  match ':controller(/:action(/:id))', via: [ :get, :post, :patch ]
+
 end
