@@ -124,10 +124,9 @@ Rails.application.routes.draw do
   # match '/:locale' => 'books#index', via: [ :get]
   # root to: 'books#index'
 
-  # get ':controller(/:action(/:id(.:format)))'
-  # post ':controller(/:action(/:id(.:format)))'
-  # patch ':controller(/:action(/:id(.:format)))'
+  get ':controller(/:action(/:id(.:format)))'
+  post ':controller(/:action(/:id(.:format)))'
+  patch ':controller(/:action(/:id(.:format)))'
   # root to: 'books#index'
-  match ':controller(/:action(/:id))', via: [ :get, :post, :patch ]
 
 end
