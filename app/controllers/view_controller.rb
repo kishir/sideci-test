@@ -68,7 +68,7 @@ class ViewController < ApplicationController
 
   # def default_url_options(options = {})
   #   { charset: 'utf-8' }
-  # end 
+  # end
 
   def adopt
     render layout: 'sub'

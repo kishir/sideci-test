@@ -101,7 +101,7 @@ Rails.application.routes.draw do
 
   # get '/blogs/:user_id' => 'blogs#index'
   # get '/blogs/:user_id', to: 'blogs#index'
-  # get 'hello/view' 
+  # get 'hello/view'
   # get '/articles(/:category)' => 'articles#index',
   #  defaults: { category: 'general', format: 'xml' }
 
